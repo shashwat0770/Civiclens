@@ -1,63 +1,88 @@
-import { useState, useCallback } from "react";
-import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
-
-const mapContainerStyle = {
-  width: "100%",
-  height: "400px",
-};
-
-const defaultCenter = {
-  lat: 40.7128,
-  lng: -74.0060,
-};
+import { useState, useEffect, useRef } from "react";
+import mapboxgl from "mapbox-gl";
+import "mapbox-gl/dist/mapbox-gl.css";
+import { Input } from "./ui/input";
+import { Label } from "./ui/label";
 
 interface MapPickerProps {
   onLocationSelect: (lat: number, lng: number) => void;
 }
 
 const MapPicker = ({ onLocationSelect }: MapPickerProps) => {
-  const [markerPosition, setMarkerPosition] = useState<{ lat: number; lng: number } | null>(null);
+  const mapContainer = useRef<HTMLDivElement>(null);
+  const map = useRef<mapboxgl.Map | null>(null);
+  const marker = useRef<mapboxgl.Marker | null>(null);
+  const [mapboxToken, setMapboxToken] = useState("");
+  const [isMapReady, setIsMapReady] = useState(false);
 
-  // Note: Replace with your actual Google Maps API key
-  // For development, you can use the env variable approach
-  const { isLoaded } = useJsApiLoader({
-    id: "google-map-script",
-    googleMapsApiKey: "YOUR_GOOGLE_MAPS_API_KEY", // Replace with actual key
-  });
+  useEffect(() => {
+    if (!mapContainer.current || !mapboxToken || isMapReady) return;
 
-  const onMapClick = useCallback(
-    (e: google.maps.MapMouseEvent) => {
-      if (e.latLng) {
-        const lat = e.latLng.lat();
-        const lng = e.latLng.lng();
-        setMarkerPosition({ lat, lng });
-        onLocationSelect(lat, lng);
+    mapboxgl.accessToken = mapboxToken;
+    
+    map.current = new mapboxgl.Map({
+      container: mapContainer.current,
+      style: "mapbox://styles/mapbox/streets-v12",
+      center: [-74.0060, 40.7128],
+      zoom: 13,
+    });
+
+    map.current.addControl(new mapboxgl.NavigationControl(), "top-right");
+
+    map.current.on("click", (e) => {
+      const { lng, lat } = e.lngLat;
+      
+      if (marker.current) {
+        marker.current.remove();
       }
-    },
-    [onLocationSelect]
-  );
+      
+      marker.current = new mapboxgl.Marker()
+        .setLngLat([lng, lat])
+        .addTo(map.current!);
+      
+      onLocationSelect(lat, lng);
+    });
 
-  if (!isLoaded) {
-    return (
-      <div className="w-full h-[400px] bg-muted rounded-md flex items-center justify-center">
-        <p className="text-muted-foreground">Loading map...</p>
-      </div>
-    );
-  }
+    setIsMapReady(true);
+
+    return () => {
+      marker.current?.remove();
+      map.current?.remove();
+    };
+  }, [mapboxToken, onLocationSelect, isMapReady]);
 
   return (
-    <div className="rounded-md overflow-hidden border">
-      <GoogleMap
-        mapContainerStyle={mapContainerStyle}
-        center={markerPosition || defaultCenter}
-        zoom={13}
-        onClick={onMapClick}
-      >
-        {markerPosition && <Marker position={markerPosition} />}
-      </GoogleMap>
-      <p className="text-sm text-muted-foreground p-2 bg-muted">
-        Click on the map to select the location of the issue
-      </p>
+    <div className="space-y-4">
+      <div className="space-y-2">
+        <Label htmlFor="mapbox-token">Mapbox Public Token</Label>
+        <Input
+          id="mapbox-token"
+          type="text"
+          placeholder="Enter your Mapbox public token"
+          value={mapboxToken}
+          onChange={(e) => setMapboxToken(e.target.value)}
+        />
+        <p className="text-xs text-muted-foreground">
+          Get your free token at{" "}
+          <a
+            href="https://account.mapbox.com/access-tokens/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline hover:text-primary"
+          >
+            mapbox.com
+          </a>
+        </p>
+      </div>
+      
+      {mapboxToken && (
+        <div className="rounded-md overflow-hidden border">
+          <div ref={mapContainer} className="w-full h-[400px]" />
+          <p className="text-sm text-muted-foreground p-2 bg-muted">
+            Click on the map to select the location of the issue
+          </p>
+        </div>
+      )}
     </div>
   );
 };
