@@ -1,4 +1,4 @@
-# 🏙️ <h1>CivicLens — Smart Civic Complaint & Tracking Platform</h1>
+#  <h1>🏙️ CivicLens — Smart Civic Complaint & Tracking Platform</h1>
 
 > **CivicLens** is a next-generation civic engagement platform that empowers citizens to report local issues directly to municipal authorities.  
 > Whether it’s a pothole, broken streetlight, or garbage overflow — CivicLens ensures your voice is heard, tracked, and resolved transparently.
