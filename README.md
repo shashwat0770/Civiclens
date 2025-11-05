@@ -40,7 +40,7 @@ Below are screenshots of demonstration of live project of our website:
 <img width="1914" height="1022" alt="Screenshot 2025-11-05 123124" src="https://github.com/user-attachments/assets/b7020f58-c1b5-4fac-8f06-6d485c9eceff" />
 <br>
 <br>
-<h2>Footer of website Civiclens/h2>
+<h2>Footer of website Civiclens</h2>
 <br>
 <img width="1910" height="1027" alt="Screenshot 2025-11-05 123135" src="https://github.com/user-attachments/assets/77037be0-f29f-433b-87ae-a8f313dc1f02" />
 <br>
