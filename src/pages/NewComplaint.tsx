@@ -24,8 +24,10 @@ const NewComplaint = () => {
     municipality: "",
     ward: "",
     priority: "LOW",
-    location_lat: 0,
-    location_lng: 0,
+    address: "",
+    city: "",
+    state: "",
+    pincode: "",
   });
 
   useEffect(() => {
@@ -48,8 +50,8 @@ const NewComplaint = () => {
     if (data) setCategories(data);
   };
 
-  const handleLocationSelect = (lat: number, lng: number) => {
-    setFormData({ ...formData, location_lat: lat, location_lng: lng });
+  const handleAddressChange = (addressData: { address: string; city: string; state: string; pincode: string }) => {
+    setFormData({ ...formData, ...addressData });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -59,8 +61,8 @@ const NewComplaint = () => {
       return;
     }
 
-    if (formData.location_lat === 0 || formData.location_lng === 0) {
-      toast.error("Please select a location on the map");
+    if (!formData.address || !formData.city || !formData.state || !formData.pincode) {
+      toast.error("Please fill in all address fields");
       return;
     }
 
@@ -78,8 +80,10 @@ const NewComplaint = () => {
             municipality: formData.municipality,
             ward: formData.ward,
             priority: formData.priority,
-            location_lat: formData.location_lat,
-            location_lng: formData.location_lng,
+            address: formData.address,
+            city: formData.city,
+            state: formData.state,
+            pincode: formData.pincode,
           },
         ])
         .select()
@@ -197,14 +201,9 @@ const NewComplaint = () => {
               <div className="space-y-2">
                 <Label className="flex items-center gap-2">
                   <MapPin className="h-4 w-4" />
-                  Location *
+                  Address Details *
                 </Label>
-                <MapPicker onLocationSelect={handleLocationSelect} />
-                {formData.location_lat !== 0 && (
-                  <p className="text-sm text-muted-foreground">
-                    Selected: {formData.location_lat.toFixed(6)}, {formData.location_lng.toFixed(6)}
-                  </p>
-                )}
+                <MapPicker onAddressChange={handleAddressChange} />
               </div>
 
               <Button type="submit" className="w-full" disabled={loading}>

@@ -69,15 +69,19 @@ export type Database = {
       }
       complaints: {
         Row: {
+          address: string | null
           category_id: number | null
+          city: string | null
           created_at: string | null
           description: string
           id: string
-          location_lat: number
-          location_lng: number
+          location_lat: number | null
+          location_lng: number | null
           municipality: string | null
           photos: string[] | null
+          pincode: string | null
           priority: string | null
+          state: string | null
           status: string | null
           title: string
           updated_at: string | null
@@ -85,15 +89,19 @@ export type Database = {
           ward: string | null
         }
         Insert: {
+          address?: string | null
           category_id?: number | null
+          city?: string | null
           created_at?: string | null
           description: string
           id?: string
-          location_lat: number
-          location_lng: number
+          location_lat?: number | null
+          location_lng?: number | null
           municipality?: string | null
           photos?: string[] | null
+          pincode?: string | null
           priority?: string | null
+          state?: string | null
           status?: string | null
           title: string
           updated_at?: string | null
@@ -101,15 +109,19 @@ export type Database = {
           ward?: string | null
         }
         Update: {
+          address?: string | null
           category_id?: number | null
+          city?: string | null
           created_at?: string | null
           description?: string
           id?: string
-          location_lat?: number
-          location_lng?: number
+          location_lat?: number | null
+          location_lng?: number | null
           municipality?: string | null
           photos?: string[] | null
+          pincode?: string | null
           priority?: string | null
+          state?: string | null
           status?: string | null
           title?: string
           updated_at?: string | null

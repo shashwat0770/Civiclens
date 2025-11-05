@@ -1,88 +1,77 @@
-import { useState, useEffect, useRef } from "react";
-import mapboxgl from "mapbox-gl";
-import "mapbox-gl/dist/mapbox-gl.css";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 
-interface MapPickerProps {
-  onLocationSelect: (lat: number, lng: number) => void;
+interface AddressData {
+  address: string;
+  city: string;
+  state: string;
+  pincode: string;
 }
 
-const MapPicker = ({ onLocationSelect }: MapPickerProps) => {
-  const mapContainer = useRef<HTMLDivElement>(null);
-  const map = useRef<mapboxgl.Map | null>(null);
-  const marker = useRef<mapboxgl.Marker | null>(null);
-  const [mapboxToken, setMapboxToken] = useState("");
-  const [isMapReady, setIsMapReady] = useState(false);
+interface MapPickerProps {
+  onAddressChange: (address: AddressData) => void;
+}
 
-  useEffect(() => {
-    if (!mapContainer.current || !mapboxToken || isMapReady) return;
-
-    mapboxgl.accessToken = mapboxToken;
-    
-    map.current = new mapboxgl.Map({
-      container: mapContainer.current,
-      style: "mapbox://styles/mapbox/streets-v12",
-      center: [-74.0060, 40.7128],
-      zoom: 13,
-    });
-
-    map.current.addControl(new mapboxgl.NavigationControl(), "top-right");
-
-    map.current.on("click", (e) => {
-      const { lng, lat } = e.lngLat;
-      
-      if (marker.current) {
-        marker.current.remove();
-      }
-      
-      marker.current = new mapboxgl.Marker()
-        .setLngLat([lng, lat])
-        .addTo(map.current!);
-      
-      onLocationSelect(lat, lng);
-    });
-
-    setIsMapReady(true);
-
-    return () => {
-      marker.current?.remove();
-      map.current?.remove();
+const MapPicker = ({ onAddressChange }: MapPickerProps) => {
+  const handleChange = (field: keyof AddressData, value: string) => {
+    const addressData: AddressData = {
+      address: (document.getElementById('address') as HTMLInputElement)?.value || '',
+      city: (document.getElementById('city') as HTMLInputElement)?.value || '',
+      state: (document.getElementById('state') as HTMLInputElement)?.value || '',
+      pincode: (document.getElementById('pincode') as HTMLInputElement)?.value || '',
     };
-  }, [mapboxToken, onLocationSelect, isMapReady]);
+    addressData[field] = value;
+    onAddressChange(addressData);
+  };
 
   return (
     <div className="space-y-4">
       <div className="space-y-2">
-        <Label htmlFor="mapbox-token">Mapbox Public Token</Label>
+        <Label htmlFor="address">Street Address *</Label>
         <Input
-          id="mapbox-token"
+          id="address"
           type="text"
-          placeholder="Enter your Mapbox public token"
-          value={mapboxToken}
-          onChange={(e) => setMapboxToken(e.target.value)}
+          placeholder="Enter street address"
+          onChange={(e) => handleChange('address', e.target.value)}
+          required
         />
-        <p className="text-xs text-muted-foreground">
-          Get your free token at{" "}
-          <a
-            href="https://account.mapbox.com/access-tokens/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="underline hover:text-primary"
-          >
-            mapbox.com
-          </a>
-        </p>
       </div>
-      
-      {mapboxToken && (
-        <div className="rounded-md overflow-hidden border">
-          <div ref={mapContainer} className="w-full h-[400px]" />
-          <p className="text-sm text-muted-foreground p-2 bg-muted">
-            Click on the map to select the location of the issue
-          </p>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="space-y-2">
+          <Label htmlFor="city">City *</Label>
+          <Input
+            id="city"
+            type="text"
+            placeholder="Enter city"
+            onChange={(e) => handleChange('city', e.target.value)}
+            required
+          />
         </div>
-      )}
+
+        <div className="space-y-2">
+          <Label htmlFor="state">State *</Label>
+          <Input
+            id="state"
+            type="text"
+            placeholder="Enter state"
+            onChange={(e) => handleChange('state', e.target.value)}
+            required
+          />
+        </div>
+      </div>
+
+      <div className="space-y-2">
+        <Label htmlFor="pincode">Pincode *</Label>
+        <Input
+          id="pincode"
+          type="text"
+          placeholder="Enter pincode"
+          maxLength={6}
+          onChange={(e) => handleChange('pincode', e.target.value)}
+          required
+        />
+      </div>
     </div>
   );
 };
