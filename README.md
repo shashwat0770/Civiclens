@@ -36,32 +36,32 @@ Citizens can log issues with geolocation and photos, while authorities can manag
 Below are screenshots of demonstration of live project of our website:
 
 <h2>Home Page of our website Civiclens</h2>
-<br>
+
 <img width="1914" height="1022" alt="Screenshot 2025-11-05 123124" src="https://github.com/user-attachments/assets/b7020f58-c1b5-4fac-8f06-6d485c9eceff" />
 <br>
 <br>
 <h2>Footer of website Civiclens</h2>
-<br>
+
 <img width="1910" height="1027" alt="Screenshot 2025-11-05 123135" src="https://github.com/user-attachments/assets/77037be0-f29f-433b-87ae-a8f313dc1f02" />
 <br>
 <br>
 <h2>Signin/Signup page</h2>
-<br>
+
 <img width="1919" height="1022" alt="Screenshot 2025-11-05 123200" src="https://github.com/user-attachments/assets/d6e1d46d-5e09-4a7d-8f8e-d6c730203c61" />
 <br>
 <br>
 <h2>Page where complaint registration happens</h2>
-<br>
+
 <img width="1916" height="1026" alt="Screenshot 2025-11-05 123213" src="https://github.com/user-attachments/assets/20e679e4-33e5-4036-b23c-11bb89b657fc" />
 <br>
 <br>
 <h2>Submitting the complaint via Civiclens</h2>
-<br>
+
 <img width="1916" height="1025" alt="Screenshot 2025-11-05 123443" src="https://github.com/user-attachments/assets/eac94ce3-ddeb-4bc0-96bd-d2bc0baa12f0" />
 <br>
 <br>
 <h2>Viewing of registered complaints</h2>
-<br>
+
 <img width="1917" height="1026" alt="Screenshot 2025-11-05 123511" src="https://github.com/user-attachments/assets/a77a31d1-36d9-419f-b2b6-8a9f84e4f5aa" />
 <br>
 <br>
