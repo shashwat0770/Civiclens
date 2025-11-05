@@ -1,73 +1,98 @@
-# Welcome to your Lovable project
+# 🏙️ CivicLens — Smart Civic Complaint & Tracking Platform
 
-## Project info
+![CivicLens Banner]
 
-**URL**: https://lovable.dev/projects/c40248c8-0b07-43d5-bbf7-66e39f3b19d2
+> **CivicLens** is a next-generation civic engagement platform that empowers citizens to report local issues directly to municipal authorities.  
+> Whether it’s a pothole, broken streetlight, or garbage overflow — CivicLens ensures your voice is heard, tracked, and resolved transparently.
 
-## How can I edit this code?
+---
 
-There are several ways of editing your application.
+## 🌐 Live Demo
 
-**Use Lovable**
+🔗 **Visit the Deployed Website:**  
+👉 [https://view-civic.lovable.app/](https://view-civic.lovable.app/)
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/c40248c8-0b07-43d5-bbf7-66e39f3b19d2) and start prompting.
+> Explore the live version hosted on **Lovable**, featuring real-time updates, map-based reporting, and Supabase-backed infrastructure.
 
-Changes made via Lovable will be committed automatically to this repo.
+---
 
-**Use your preferred IDE**
+## 🧠 Project Overview
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+CivicLens bridges the gap between **citizens** and **local authorities** through a modern, intuitive, and transparent complaint management system.  
+Citizens can log issues with geolocation and photos, while authorities can manage, resolve, and update complaints in real time.
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### ✨ Key Highlights
+- 🗺️ **Map-based complaint reporting** using Google Maps API  
+- 📸 **Photo uploads** for visual evidence  
+- 🔔 **Real-time updates** for status tracking  
+- 🏛️ **Role-based dashboards** for users, authorities, and admins  
+- ⚡ **Supabase backend** for secure authentication and storage  
+- 🔄 **Keep-alive integration** to prevent Supabase from pausing on Free Tier  
 
-Follow these steps:
+---
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+### ✨ Key Highlights
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+Below are screenshots of demonstration of live project of our website:
 
-# Step 3: Install the necessary dependencies.
-npm i
+<img width="1914" height="1022" alt="Screenshot 2025-11-05 123124" src="https://github.com/user-attachments/assets/b7020f58-c1b5-4fac-8f06-6d485c9eceff" />
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+<img width="1910" height="1027" alt="Screenshot 2025-11-05 123135" src="https://github.com/user-attachments/assets/77037be0-f29f-433b-87ae-a8f313dc1f02" />
+
+<img width="1919" height="1022" alt="Screenshot 2025-11-05 123200" src="https://github.com/user-attachments/assets/d6e1d46d-5e09-4a7d-8f8e-d6c730203c61" />
+
+<img width="1916" height="1026" alt="Screenshot 2025-11-05 123213" src="https://github.com/user-attachments/assets/20e679e4-33e5-4036-b23c-11bb89b657fc" />
+
+<img width="1916" height="1025" alt="Screenshot 2025-11-05 123443" src="https://github.com/user-attachments/assets/eac94ce3-ddeb-4bc0-96bd-d2bc0baa12f0" />
+
+<img width="1917" height="1026" alt="Screenshot 2025-11-05 123511" src="https://github.com/user-attachments/assets/a77a31d1-36d9-419f-b2b6-8a9f84e4f5aa" />
+
+
+
+---
+
+## 🏗️ Tech Stack
+
+| Layer | Technologies |
+|-------|---------------|
+| **Frontend** | Next.js 14 (App Router) · TypeScript · TailwindCSS · shadcn/ui · React Query · Axios |
+| **Backend** | Next.js API Routes + Supabase (Auth, DB, Storage) |
+| **Database** | Supabase Postgres with RLS (Row-Level Security) |
+| **Maps** | Google Maps API (`@react-google-maps/api`) |
+| **Deployment** | Lovable (Full-stack hosting) |
+| **Keep Alive** | Supabase Edge Function + Cron job |
+| **Version Control** | Git + GitHub |
+
+---
+
+## ⚙️ Local Setup Guide
+
+### 1️⃣ Clone the Repository
+
+"bash
+
+git clone https://github.com/your-username/civiclens.git
+cd civiclens
+
+### 2️⃣ Install Dependencies
+"bash
+
+npm install
+# or
+pnpm install
+
+
+### 3️⃣ Configure Environment Variables
+
+Create a .env.local file in the project root:
+
+NEXT_PUBLIC_SUPABASE_URL=YOUR_SUPABASE_URL
+NEXT_PUBLIC_SUPABASE_ANON_KEY=YOUR_SUPABASE_ANON_KEY
+SUPABASE_SERVICE_ROLE_KEY=YOUR_SUPABASE_SERVICE_ROLE_KEY
+NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=YOUR_MAPS_KEY
+
+
+### 4️⃣ Run Locally
 npm run dev
-```
 
-**Edit a file directly in GitHub**
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/c40248c8-0b07-43d5-bbf7-66e39f3b19d2) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
