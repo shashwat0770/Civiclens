@@ -8,7 +8,7 @@
 ## 🌐 Live Demo
 
 🔗 **Visit the Deployed Website:**  
-👉 [https://view-civic.lovable.app/](https://view-civic.lovable.app/)
+👉 [https://civiclens-local-issue-resolver.onrender.com/]([https://view-civic.lovable.app/](https://civiclens-local-issue-resolver.onrender.com/))
 
 > Explore the live version hosted on **Lovable**, featuring real-time updates, map-based reporting, and Supabase-backed infrastructure.
 
